@@ -108,8 +108,6 @@ Licensed under the MIT License.
 
 - GitHub: [atharvakanchan25](https://github.com/atharvakanchan25)
 - Email: atharvakanchan959@gmail.com
-- LinkedIn: [atharva](https://linkedin.com/in/atharva)
-
 ---
 
 Happy coding! 🚀
