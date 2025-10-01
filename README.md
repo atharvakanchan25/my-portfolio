@@ -41,7 +41,7 @@ package.json # Dependencies and scripts
 ## Setup and Installation
 
 1. Clone the repo:
-git clone https://github.com/atharvakanchan25/portfolio-website.git
+[git clone https://github.com/atharvakanchan25/portfolio-website.git](https://github.com/atharvakanchan25/my-portfolio.git)
 cd portfolio-website
 
 2. Install dependencies:
