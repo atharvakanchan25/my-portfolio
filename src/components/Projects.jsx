@@ -64,6 +64,15 @@ const projectsData = [
     demo: "",
     type: "Machine Learning",
   },
+  {
+    id: 8,
+    name: "Robotic Process Automation (RPA) for Invoice Processing",
+    description: "Automated invoice data extraction and entry using RPA tools like UiPath to reduce manual workload and improve accuracy.",
+    tech: ["RPA", "UiPath", "Automation", "Excel", "Data Entry"],
+    github: "https://github.com/atharvakanchan25/rpa-invoice-automation", // Replace with actual repo if available
+    demo: "",
+    type: "Automation/RPA",
+  },
 ];
 
 const Projects = () => {
