@@ -26,7 +26,7 @@ const Contact = () => {
   }
 
   const socialLinks = [
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/atharva', icon: '💼' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/atharva-kanchan-797643271/', icon: '💼' },
     { name: 'GitHub', url: 'https://github.com/atharvakanchan25', icon: '💻' },
     { name: 'Email', url: 'mailto:atharvakanchan959@gmail.com', icon: '✉️' },
     { name: 'Phone', url: 'tel:+919922956748', icon: '📱' },
