@@ -1,57 +1,124 @@
-# Portfolio Website - Developer Documentation
+# Atharva Kanchan — Portfolio
 
-This repository hosts the source code for Atharva Kanchan's portfolio website, built to showcase skills, projects, and professional details with an emphasis on modern front-end development best practices.
+Personal portfolio website built with React and Tailwind CSS. Warm editorial aesthetic combining tech, research, writing, and travel into one cohesive identity.
 
----
-
-## Live Portfolio
-
-Check out the live portfolio here: [https://atharvakanchan25.github.io/my-portfolio/](https://atharvakanchan25.github.io/my-portfolio/)
+**Live:** [atharvakanchan25.github.io/my-portfolio](https://atharvakanchan25.github.io/my-portfolio/)
 
 ---
 
-## Overview
+## Stack
 
-This project is developed using React and Tailwind CSS, featuring dynamic UI elements such as animated particle backgrounds, skill bars, project cards with interactive effects, and dark mode support. The architecture emphasizes modular, reusable components and scalable theming.
+- **React 18** + **Create React App**
+- **Tailwind CSS 3** — utility-first styling with custom design tokens
+- **framer-motion** — animations, transitions, AnimatePresence
+- **Formspree** — contact form submission
+- **Google Fonts** — Fraunces (serif), DM Sans, DM Mono
 
 ---
 
-## Key Technologies and Libraries
+## Design System
 
-- **React 18**: Component-based UI framework
-- **Tailwind CSS 3**: Utility-first CSS for rapid UI development and dark mode support
-- **react-tsparticles**: Particle animations for background visual effects
-- **framer-motion**: Declarative animations and transitions
-- **react-slick**: Carousel component for featured content
-- **React Hook Form + Yup**: Contact form validation and submission flow
-- **ESLint & Prettier**: Code quality and formatting tools
-- **Vite / Create-React-App**: Development setup (depending on your preference)
+| Token | Value |
+|---|---|
+| Background | `#F8F7F4` warm off-white |
+| Ink | `#1A1A1A` |
+| Accent | `#4F46E5` indigo |
+| Accent 2 | `#6B8E23` olive |
+| Warm | `#C4A882` |
+| Serif | Fraunces |
+| Sans | DM Sans |
+| Mono | DM Mono |
 
 ---
 
 ## Project Structure
-src/
-├── components/ # UI components like Navbar, AboutMe, Skills, Projects, Resume, Contact
-├── styles/ # Custom styles and Tailwind CSS configurations
-├── App.jsx # Root app component managing layout, theme, and background
-├── index.jsx # React entry point rendering App into DOM
-public/
-├── assets/ # Static assets (images, favicon)
-tailwind.config.js # Tailwind CSS config with dark mode and color theming
-package.json # Dependencies and scripts
 
+```
+src/
+├── components/
+│   ├── SplashScreen.jsx     # AK monogram SVG draw animation
+│   ├── ScrollProgress.jsx   # Spring-animated top progress bar
+│   ├── Navbar.jsx           # Transparent → glass on scroll, active section highlight
+│   ├── Hero.jsx             # Full-screen split, cycling identity animations (Code / Travel / Reading / Writing)
+│   ├── WhatIDo.jsx          # 4 identity pillars
+│   ├── Currently.jsx        # Live status widget (building, reading, listening, exploring)
+│   ├── Work.jsx             # Asymmetric project grid, 8 projects
+│   ├── BCICase.jsx          # Experience section (Persistent Systems + IS360)
+│   ├── Certifications.jsx   # Horizontal scroll cert strip
+│   ├── Testimonials.jsx     # Animated quote carousel
+│   ├── Travel.jsx           # Horizontal scroll travel cards
+│   ├── Writing.jsx          # Medium articles list with featured lead
+│   ├── About.jsx            # Bio, skills chips, photo
+│   ├── Contact.jsx          # Floating label form + social icons
+│   └── NotFound.jsx         # Custom 404 page
+├── styles/
+│   └── index.css            # CSS variables, component classes, animations
+└── App.jsx                  # Root — splash, cursor, scroll progress, layout
+
+public/
+├── index.html               # Open Graph + Twitter Card meta tags
+├── 404.html                 # GitHub Pages SPA redirect
+├── sitemap.xml
+└── robots.txt
+tailwind.config.js
+```
 
 ---
 
-## Setup and Installation
+## Setup
 
-1. Clone the repo:
 ```bash
 git clone https://github.com/atharvakanchan25/my-portfolio.git
-cd portfolio-website
+cd my-portfolio
 npm install
 npm start
+```
 
-Visit http://localhost:3000 in your browser.
+Visit `http://localhost:3000`
 
+---
 
+## Build
+
+```bash
+npm run build
+```
+
+Gzipped output: ~105KB JS, ~5.7KB CSS
+
+---
+
+## Sections
+
+| Section | Description |
+|---|---|
+| Hero | Name, tagline, cycling SVG animations, resume CTA |
+| What I Do | Code, Research, Writing, Travel pillars |
+| Currently | Live status tabs |
+| Work | 8 ML/AI/cloud projects in asymmetric grid |
+| Experience | Persistent Systems (Agentic AI, Nov 2025 – Apr 2026) + IS360 BCI (2024) |
+| Certifications | AWS, TensorFlow, Python, ML, Power BI, Docker |
+| Testimonials | Quote carousel |
+| Travel | Horizontal scroll reflection cards |
+| Writing | Real Medium articles — philosophy, identity, AI |
+| About | Bio, skills, photo |
+| Contact | Form + GitHub, LinkedIn, Medium, Quora, Pinterest |
+
+---
+
+## Deployment
+
+Hosted on GitHub Pages from the `main` branch.
+
+To deploy manually:
+
+```bash
+npm run build
+# then push build/ or use gh-pages package
+```
+
+---
+
+## Contact
+
+Atharva Kanchan — [atharvakanchan959@gmail.com](mailto:atharvakanchan959@gmail.com)
