@@ -1,60 +1,106 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = ({ darkMode, setDarkMode }) => {
-  const handleScroll = (e, id) => {
+const LINKS = [
+  { label:'Work',     id:'work' },
+  { label:'Writing',  id:'writing' },
+  { label:'Travel',   id:'travel' },
+  { label:'About',    id:'about' },
+  { label:'Contact',  id:'contact' },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open,     setOpen]     = useState(false);
+  const [active,   setActive]   = useState('');
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30);
+      // Active section detection
+      const offsets = LINKS.map(l => {
+        const el = document.getElementById(l.id);
+        return el ? { id: l.id, top: el.getBoundingClientRect().top } : null;
+      }).filter(Boolean);
+      const current = offsets.filter(o => o.top <= 100).pop();
+      setActive(current ? current.id : '');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const go = (e, id) => {
     e.preventDefault();
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
+    setOpen(false);
   };
 
   return (
-    <nav className="fixed top-0 w-full backdrop-blur-md bg-white/80 dark:bg-gray-900/80 shadow-md z-50 transition-colors duration-300">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6 max-w-7xl">
-        <a
-          href="#about"
-          className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-300 transition"
-          onClick={(e) => handleScroll(e, 'about')}
-        >
-          Atharva Kanchan
-        </a>
-        
-        <ul className="hidden md:flex space-x-8 items-center">
-          {['about', 'skills', 'projects', 'resume', 'contact'].map((id) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                onClick={(e) => handleScroll(e, id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition duration-200"
-              >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </a>
-            </li>
-          ))}
-          <li>
-            <button
-              onClick={() => setDarkMode((prev) => !prev)}
-              className="ml-2 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-600 transition duration-200"
-              aria-label="Toggle Dark Mode"
-              title="Toggle Dark Mode"
-            >
-              {darkMode ? '🌞' : '🌙'}
-            </button>
-          </li>
-        </ul>
-
-        {/* Mobile Menu Button */}
+    <motion.header
+      initial={{ y:-50, opacity:0 }}
+      animate={{ y:0, opacity:1 }}
+      transition={{ duration:0.7, ease:[0.25,0.46,0.45,0.94] }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
+      style={{
+        background: scrolled ? 'rgba(248,247,244,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(26,26,26,0.07)' : 'none',
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+        {/* Logo */}
         <button
-          onClick={() => setDarkMode((prev) => !prev)}
-          className="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700"
-          aria-label="Toggle Dark Mode"
+          onClick={() => window.scrollTo({ top:0, behavior:'smooth' })}
+          className="font-serif italic text-ink font-medium text-lg tracking-wide hover:text-accent transition-colors duration-200 bg-transparent border-none cursor-pointer"
         >
-          {darkMode ? '🌞' : '🌙'}
+          Atharva K.
+        </button>
+
+        {/* Desktop */}
+        <nav className="hidden md:flex items-center gap-8">
+          {LINKS.map(l => (
+            <a key={l.id} href={`#${l.id}`} onClick={e => go(e, l.id)}
+              className={`font-sans text-sm transition-colors duration-200 relative group ${
+                active === l.id ? 'text-accent' : 'text-ink2 hover:text-accent'
+              }`}>
+              {l.label}
+              <span className={`absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300 ${
+                active === l.id ? 'w-full' : 'w-0 group-hover:w-full'
+              }`} />
+            </a>
+          ))}
+          <a href="mailto:atharvakanchan959@gmail.com" className="btn-p text-xs py-2.5 px-5">
+            Say Hello
+          </a>
+        </nav>
+
+        {/* Mobile */}
+        <button onClick={() => setOpen(p=>!p)} className="md:hidden p-2 flex flex-col gap-1.5" aria-label="Menu">
+          <span className={`block w-5 h-0.5 bg-ink transition-all ${open?'rotate-45 translate-y-2':''}`} />
+          <span className={`block w-5 h-0.5 bg-ink transition-all ${open?'opacity-0':''}`} />
+          <span className={`block w-5 h-0.5 bg-ink transition-all ${open?'-rotate-45 -translate-y-2':''}`} />
         </button>
       </div>
-    </nav>
-  );
-};
 
-export default Navbar;
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity:0, height:0 }}
+            animate={{ opacity:1, height:'auto' }}
+            exit={{ opacity:0, height:0 }}
+            className="md:hidden px-6 pb-6"
+            style={{ background:'rgba(248,247,244,0.97)', borderBottom:'1px solid var(--border)' }}
+          >
+            {LINKS.map(l => (
+              <a key={l.id} href={`#${l.id}`} onClick={e => go(e, l.id)}
+                className="block py-3 text-sm text-ink2 border-b last:border-0 hover:text-accent transition-colors"
+                style={{ borderColor:'var(--border)' }}>
+                {l.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}

@@ -1,63 +1,87 @@
-import React, { useState, useEffect } from "react";
-import Particles from "react-tsparticles";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import Navbar from "./components/Navbar";
-import AboutMe from "./components/AboutMe";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Resume from "./components/Resume";
-import Contact from "./components/Contact";
+import Navbar         from './components/Navbar';
+import Hero           from './components/Hero';
+import WhatIDo        from './components/WhatIDo';
+import Work           from './components/Work';
+import BCICase        from './components/BCICase';
+import Travel         from './components/Travel';
+import Writing        from './components/Writing';
+import About          from './components/About';
+import Contact        from './components/Contact';
+import SplashScreen   from './components/SplashScreen';
+import ScrollProgress from './components/ScrollProgress';
+import Currently      from './components/Currently';
+import Certifications from './components/Certifications';
+import Testimonials   from './components/Testimonials';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem("darkMode");
-    return saved === "true" || window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+export default function App() {
+  const [splashDone, setSplashDone] = useState(false);
+  const dotRef  = useRef(null);
+  const ringRef = useRef(null);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("darkMode", "true");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("darkMode", "false");
-    }
-  }, [darkMode]);
+    const move = e => {
+      if (dotRef.current)  { dotRef.current.style.left  = e.clientX+'px'; dotRef.current.style.top  = e.clientY+'px'; }
+      if (ringRef.current) { ringRef.current.style.left = e.clientX+'px'; ringRef.current.style.top = e.clientY+'px'; }
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
 
   return (
-    <div className="relative min-h-screen bg-gray-900 text-gray-200 transition-colors duration-500 overflow-x-hidden">
-      <Particles
-        options={{
-          background: { color: { value: "#0a0f2f" } },
-          fpsLimit: 60,
-          interactivity: { events: { onHover: { enable: true, mode: "repulse" }, resize: true } },
-          particles: {
-            color: { value: "#8b5cf6" },
-            links: { color: "#8b5cf6", distance: 200, enable: true, opacity: 0.6, width: 2 },
-            move: { enable: true, speed: 1 },
-            number: { value: 80, density: { enable: true, area: 900 } },
-            opacity: { value: 0.85, anim: { enable: true, speed: 1, opacity_min: 0.3 } },
-            shape: { type: "circle" },
-            size: { random: true, value: 4 },
-          },
-          detectRetina: true,
-        }}
-        style={{ position: "fixed", zIndex: 0, top: 0, left: 0, width: "100%", height: "100%" }}
-      />
+    <div className="relative min-h-screen overflow-x-hidden" style={{ background:'#F8F7F4' }}>
+      {/* Scroll progress */}
+      <ScrollProgress />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pt-28 space-y-24">
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <AboutMe />
-        <Skills />
-        <Projects />
-        <Resume />
+      {/* Custom cursor */}}
+      <div ref={dotRef}  className="cursor-dot  hidden lg:block" />
+      <div ref={ringRef} className="cursor-ring hidden lg:block" />
+
+      <AnimatePresence>
+        {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity:0 }}
+        animate={{ opacity: splashDone ? 1 : 0 }}
+        transition={{ duration:0.9 }}
+      >
+        <Navbar />
+        <Hero />
+        <WhatIDo />
+        <Currently />
+        <Work />
+        <BCICase />
+        <Certifications />
+        <Testimonials />
+        <Travel />
+        <Writing />
+        <About />
         <Contact />
-        <footer className="text-center text-gray-400 py-8 select-none">
-          © {new Date().getFullYear()} Atharva Kanchan. All rights reserved.
+
+        <footer className="py-10 px-6 lg:px-20 border-t" style={{ borderColor:'var(--border)' }}>
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <span className="font-serif italic text-ink2 text-sm">Atharva Kanchan</span>
+            <p className="font-mono text-muted text-xs tracking-widest">© {new Date().getFullYear()} — All rights reserved</p>
+            <div className="flex gap-6">
+              {[
+                { l:'GitHub',    h:'https://github.com/atharvakanchan25' },
+                { l:'LinkedIn',  h:'https://www.linkedin.com/in/atharva-kanchan-797643271/' },
+                { l:'Medium',    h:'https://medium.com/@atharvakanchan959/about' },
+                { l:'Quora',     h:'https://www.quora.com/profile/Atharva-Kanchan' },
+                { l:'Pinterest', h:'https://in.pinterest.com/atharva_kanchan/' },
+              ].map(x => (
+                <a key={x.l} href={x.h} target="_blank" rel="noopener noreferrer"
+                  className="text-xs text-muted hover:text-accent transition-colors duration-200 font-mono tracking-wide">
+                  {x.l}
+                </a>
+              ))}
+            </div>
+          </div>
         </footer>
-      </div>
+      </motion.div>
     </div>
   );
 }
-
-export default App;

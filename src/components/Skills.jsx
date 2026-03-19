@@ -1,68 +1,83 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const Skills = () => {
-  const skillsData = [
-    { name: 'Python', level: 90, category: 'Programming' },
-    { name: 'Java', level: 75, category: 'Programming' },
-    { name: 'MySQL', level: 70, category: 'Programming' },
-    { name: 'HTML/CSS', level: 80, category: 'Programming' },
-    { name: 'TensorFlow', level: 85, category: 'ML/DL' },
-    { name: 'PyTorch', level: 85, category: 'ML/DL' },
-    { name: 'Scikit-learn', level: 80, category: 'ML/DL' },
-    { name: 'OpenCV', level: 75, category: 'ML/DL' },
-    { name: 'Pandas', level: 85, category: 'Data Analysis' },
-    { name: 'NumPy', level: 85, category: 'Data Analysis' },
-    { name: 'Power BI', level: 80, category: 'Data Analysis' },
-    { name: 'Tableau', level: 75, category: 'Data Analysis' },
-    { name: 'Git/GitHub', level: 85, category: 'DevOps/Tools' },
-    { name: 'Docker', level: 65, category: 'DevOps/Tools' },
-    { name: 'AWS', level: 70, category: 'DevOps/Tools' },
-    { name: 'CI/CD', level: 65, category: 'DevOps/Tools' },
-    { name: 'Linux', level: 70, category: 'DevOps/Tools' },
-  ];
+const GROUPS = [
+  {
+    label: 'Programming',
+    color: '#3B82F6',
+    skills: ['Python', 'Java', 'SQL', 'HTML/CSS'],
+  },
+  {
+    label: 'ML / Deep Learning',
+    color: '#8B5CF6',
+    skills: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenCV', 'U-Net'],
+  },
+  {
+    label: 'Data & Analytics',
+    color: '#22D3EE',
+    skills: ['Pandas', 'NumPy', 'Power BI', 'Tableau'],
+  },
+  {
+    label: 'Cloud & DevOps',
+    color: '#3B82F6',
+    skills: ['AWS', 'Docker', 'Git', 'Linux', 'CI/CD'],
+  },
+];
 
-  return (
-    <section id="skills" className="py-20 px-6 bg-gray-50 dark:bg-gray-800/50">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold mb-12 text-center text-gray-800 dark:text-white">
-          Skills & Expertise
+const Skills = () => (
+  <section id="skills" className="py-32 px-6 lg:px-16">
+    <div className="max-w-5xl mx-auto">
+      <div className="divider mb-20" />
+
+      <motion.div
+        initial={{ opacity:0, y:24 }}
+        whileInView={{ opacity:1, y:0 }}
+        viewport={{ once:true }}
+        transition={{ duration:0.6 }}
+        className="text-center mb-16"
+      >
+        <span className="section-label justify-center">Expertise</span>
+        <h2 className="font-display font-bold text-white mt-2"
+          style={{ fontSize:'clamp(1.8rem,3.5vw,2.8rem)' }}>
+          Tools & Technologies
         </h2>
+      </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillsData.map((skill) => (
-            <div
-              key={skill.name}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"
-            >
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-semibold text-gray-800 dark:text-white">
-                  {skill.name}
-                </span>
-                <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">
-                  {skill.level}%
-                </span>
-              </div>
-              
-              <div className="h-3 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                <div
-                  className="h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-1000 ease-out"
-                  style={{ width: `${skill.level}%` }}
-                  role="progressbar"
-                  aria-valuenow={skill.level}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                />
-              </div>
-              
-              <span className="text-xs text-gray-500 dark:text-gray-400 mt-2 block">
-                {skill.category}
-              </span>
+      <div className="grid sm:grid-cols-2 gap-10">
+        {GROUPS.map((g, gi) => (
+          <motion.div
+            key={g.label}
+            initial={{ opacity:0, y:20 }}
+            whileInView={{ opacity:1, y:0 }}
+            viewport={{ once:true }}
+            transition={{ duration:0.5, delay: gi * 0.1 }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-1 h-4 rounded-full" style={{ background: g.color }} />
+              <p className="text-xs font-semibold tracking-widest uppercase"
+                style={{ color: g.color, opacity:0.8 }}>{g.label}</p>
             </div>
-          ))}
-        </div>
+            <div className="flex flex-wrap gap-2">
+              {g.skills.map((s, si) => (
+                <motion.span
+                  key={s}
+                  initial={{ opacity:0, scale:0.9 }}
+                  whileInView={{ opacity:1, scale:1 }}
+                  viewport={{ once:true }}
+                  transition={{ delay: gi * 0.1 + si * 0.04 }}
+                  whileHover={{ y:-3, borderColor: g.color, color: g.color }}
+                  className="skill-chip"
+                  style={{ transition:'all 0.2s ease' }}
+                >
+                  {s}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Skills;

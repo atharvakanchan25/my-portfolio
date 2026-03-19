@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atharvakanchan25.github.io/my-portfolio/sitemap.xml
