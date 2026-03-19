@@ -2,8 +2,9 @@
 
 Personal portfolio website built with React and Tailwind CSS. Warm editorial aesthetic combining tech, research, writing, and travel into one cohesive identity.
 
-**Live:** https://atharvakanchan25.github.io/my-portfolio/
-](https://atharvakanchan25.github.io/my-portfolio/)
+## 🌐 Live Demo
+
+🔗 [View Portfolio](https://atharvakanchan25.github.io/my-portfolio/)
 ---
 
 ## Stack
