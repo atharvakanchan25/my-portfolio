@@ -28,12 +28,12 @@ const SplashScreen = ({ onDone }) => {
           animate={{ opacity: phase === 'out' ? 0 : 1 }}
           transition={{ duration:0.8, ease:'easeInOut' }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
-          style={{ background:'#F8F7F4' }}
+          style={{ background:'#0D0D0D' }}
         >
           {/* Subtle paper texture lines */}
           {[...Array(8)].map((_,i) => (
             <div key={i} className="absolute w-full"
-              style={{ top:`${12.5*(i+1)}%`, height:1, background:'rgba(26,26,26,0.04)' }} />
+              style={{ top:`${12.5*(i+1)}%`, height:1, background:'rgba(240,239,236,0.04)' }} />
           ))}
 
           {/* AK monogram */}
@@ -47,7 +47,7 @@ const SplashScreen = ({ onDone }) => {
                 <motion.path
                   key={i}
                   d={s.d}
-                  stroke="#1A1A1A"
+                  stroke="#F0EFEC"
                   strokeWidth="8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -89,7 +89,7 @@ const SplashScreen = ({ onDone }) => {
 
           {/* Progress line */}
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2"
-            style={{ width:120, height:1, background:'rgba(26,26,26,0.1)' }}>
+            style={{ width:120, height:1, background:'rgba(240,239,236,0.1)' }}>
             <motion.div style={{ height:'100%', background:'#4F46E5' }}
               initial={{ width:'0%' }}
               animate={{ width:'100%' }}

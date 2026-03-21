@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden" style={{ background:'#F8F7F4' }}>
+    <div className="relative min-h-screen overflow-x-hidden" style={{ background:'#0D0D0D' }}>
       {/* Scroll progress */}
       <ScrollProgress />
 

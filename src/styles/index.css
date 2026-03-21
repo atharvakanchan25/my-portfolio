@@ -5,17 +5,17 @@
 @tailwind utilities;
 
 :root {
-  --bg:       #F8F7F4;
-  --bg2:      #F2F0EC;
-  --bg3:      #ECEAE4;
-  --ink:      #1A1A1A;
-  --ink2:     #3D3D3D;
-  --muted:    #8A8A8A;
-  --border:   rgba(26,26,26,0.08);
-  --accent:   #4F46E5;
-  --accent2:  #6B8E23;
+  --bg:       #0D0D0D;
+  --bg2:      #111111;
+  --bg3:      #1A1A1A;
+  --ink:      #F0EFEC;
+  --ink2:     #B8B5AF;
+  --muted:    #5A5A5A;
+  --border:   rgba(240,239,236,0.07);
+  --accent:   #6366F1;
+  --accent2:  #7FAF2A;
   --warm:     #C4A882;
-  --paper:    #FAF9F6;
+  --paper:    #141414;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +37,7 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ── Selection ── */
-::selection { background: rgba(79,70,229,0.15); color: var(--ink); }
+::selection { background: rgba(99,102,241,0.25); color: var(--ink); }
 
 /* ── Font helpers ── */
 .font-serif  { font-family: 'Fraunces', Georgia, serif; }
@@ -97,8 +97,8 @@ body::after {
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .card:hover {
-  border-color: rgba(79,70,229,0.2);
-  box-shadow: 0 12px 48px rgba(26,26,26,0.08), 0 2px 8px rgba(26,26,26,0.04);
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
   transform: translateY(-3px);
 }
 
@@ -114,7 +114,7 @@ body::after {
   transition: all 0.25s ease;
   letter-spacing: 0.01em;
 }
-.btn-p:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,70,229,0.25); }
+.btn-p:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(99,102,241,0.3); }
 
 /* ── Btn outline ── */
 .btn-o {
@@ -127,7 +127,7 @@ body::after {
   border-radius: 3px;
   transition: all 0.25s ease;
 }
-.btn-o:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,70,229,0.04); }
+.btn-o:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.08); }
 
 /* ── Tag pill ── */
 .tag {
@@ -142,7 +142,7 @@ body::after {
   letter-spacing: 0.04em;
   transition: all 0.2s;
 }
-.tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,70,229,0.06); }
+.tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
 
 /* ── Skill chip ── */
 .chip {
@@ -171,7 +171,7 @@ body::after {
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.08); }
+.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); }
 .field::placeholder { color: var(--muted); }
 
 /* ── Neural SVG animation ── */
@@ -220,7 +220,7 @@ body::after {
   z-index: 9999;
   transform: translate(-50%,-50%);
   transition: transform 0.1s, opacity 0.3s;
-  mix-blend-mode: multiply;
+  mix-blend-mode: screen;
 }
 .cursor-ring {
   position: fixed;

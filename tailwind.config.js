@@ -4,17 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg:      '#F8F7F4',
-        bg2:     '#F2F0EC',
-        bg3:     '#ECEAE4',
-        paper:   '#FAF9F6',
-        ink:     '#1A1A1A',
-        ink2:    '#3D3D3D',
-        muted:   '#8A8A8A',
-        accent:  '#4F46E5',
-        accent2: '#6B8E23',
+        bg:      '#0D0D0D',
+        bg2:     '#111111',
+        bg3:     '#1A1A1A',
+        paper:   '#141414',
+        ink:     '#F0EFEC',
+        ink2:    '#B8B5AF',
+        muted:   '#5A5A5A',
+        accent:  '#6366F1',
+        accent2: '#7FAF2A',
         warm:    '#C4A882',
-        border:  'rgba(26,26,26,0.08)',
+        border:  'rgba(240,239,236,0.07)',
       },
       fontFamily: {
         sans:    ['DM Sans', 'system-ui', 'sans-serif'],
