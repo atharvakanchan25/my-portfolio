@@ -42,16 +42,16 @@ export default function Navbar() {
       transition={{ duration:0.7, ease:[0.25,0.46,0.45,0.94] }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
       style={{
-        background: scrolled ? 'rgba(248,247,244,0.92)' : 'transparent',
+        background: scrolled ? 'rgba(13,13,13,0.85)' : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(26,26,26,0.07)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(240,239,236,0.07)' : 'none',
       }}
     >
       <div className="max-w-6xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top:0, behavior:'smooth' })}
-          className="font-serif italic text-ink font-medium text-lg tracking-wide hover:text-accent transition-colors duration-200 bg-transparent border-none cursor-pointer"
+          className="font-serif italic font-medium text-lg tracking-wide text-ink hover:text-accent transition-colors duration-200 bg-transparent border-none cursor-pointer"
         >
           Atharva K.
         </button>
@@ -89,7 +89,7 @@ export default function Navbar() {
             animate={{ opacity:1, height:'auto' }}
             exit={{ opacity:0, height:0 }}
             className="md:hidden px-6 pb-6"
-            style={{ background:'rgba(248,247,244,0.97)', borderBottom:'1px solid var(--border)' }}
+            style={{ background:'rgba(13,13,13,0.97)', borderBottom:'1px solid var(--border)' }}
           >
             {LINKS.map(l => (
               <a key={l.id} href={`#${l.id}`} onClick={e => go(e, l.id)}

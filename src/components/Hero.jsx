@@ -304,6 +304,41 @@ const IdentityViz = () => {
 
 const stagger = { hidden:{}, visible:{ transition:{ staggerChildren:0.1 } } };
 const item    = { hidden:{ opacity:0, y:28 }, visible:{ opacity:1, y:0, transition:{ duration:0.7, ease:[0.25,0.46,0.45,0.94] } } };
+
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+
+function ScrambleText({ text, delay = 0 }) {
+  const [display, setDisplay] = useState(text);
+  useEffect(() => {
+    let frame = 0;
+    const total = 18;
+    const t = setTimeout(() => {
+      const iv = setInterval(() => {
+        setDisplay(text.split('').map((ch, i) => {
+          if (ch === ' ') return ' ';
+          if (frame / total > i / text.length) return ch;
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }).join(''));
+        frame++;
+        if (frame > total) { setDisplay(text); clearInterval(iv); }
+      }, 45);
+    }, delay);
+    return () => clearTimeout(t);
+  }, [text, delay]);
+  return <>{display}</>;
+}
+
+function TypewriterText({ text, delay = 0 }) {
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const iv = setInterval(() => setShown(p => { if (p >= text.length) { clearInterval(iv); return p; } return p + 1; }), 32);
+      return () => clearInterval(iv);
+    }, delay);
+    return () => clearTimeout(t);
+  }, [text, delay]);
+  return <>{text.slice(0, shown)}<span className="tw-cur" /></>;
+}
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center px-6 lg:px-20 pt-16 overflow-hidden">

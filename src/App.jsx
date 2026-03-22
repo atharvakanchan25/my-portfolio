@@ -22,12 +22,47 @@ export default function App() {
   const ringRef = useRef(null);
 
   useEffect(() => {
+    let raf;
+    let rx = 0, ry = 0; // ring position (lerped)
+    let mx = 0, my = 0; // actual mouse
+
     const move = e => {
-      if (dotRef.current)  { dotRef.current.style.left  = e.clientX+'px'; dotRef.current.style.top  = e.clientY+'px'; }
-      if (ringRef.current) { ringRef.current.style.left = e.clientX+'px'; ringRef.current.style.top = e.clientY+'px'; }
+      mx = e.clientX; my = e.clientY;
+      if (dotRef.current) {
+        dotRef.current.style.left = mx + 'px';
+        dotRef.current.style.top  = my + 'px';
+      }
+      // magnetic snap to nearest interactive element
+      const el = document.elementFromPoint(mx, my)?.closest('a,button');
+      if (el && dotRef.current && ringRef.current) {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        dotRef.current.style.transform  = `translate(-50%,-50%) scale(2.5)`;
+        ringRef.current.style.width     = (r.width  + 16) + 'px';
+        ringRef.current.style.height    = (r.height + 16) + 'px';
+        ringRef.current.style.borderRadius = '6px';
+        ringRef.current.style.left = cx + 'px';
+        ringRef.current.style.top  = cy + 'px';
+      } else {
+        if (dotRef.current)  dotRef.current.style.transform  = 'translate(-50%,-50%) scale(1)';
+        if (ringRef.current) { ringRef.current.style.width = '32px'; ringRef.current.style.height = '32px'; ringRef.current.style.borderRadius = '50%'; }
+      }
     };
+
+    const lerp = () => {
+      const el = document.elementFromPoint(mx, my)?.closest('a,button');
+      if (!el && ringRef.current) {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ringRef.current.style.left = rx + 'px';
+        ringRef.current.style.top  = ry + 'px';
+      }
+      raf = requestAnimationFrame(lerp);
+    };
+
     window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    raf = requestAnimationFrame(lerp);
+    return () => { window.removeEventListener('mousemove', move); cancelAnimationFrame(raf); };
   }, []);
 
   return (
@@ -35,7 +70,7 @@ export default function App() {
       {/* Scroll progress */}
       <ScrollProgress />
 
-      {/* Custom cursor */}}
+      {/* Custom cursor */}
       <div ref={dotRef}  className="cursor-dot  hidden lg:block" />
       <div ref={ringRef} className="cursor-ring hidden lg:block" />
 
@@ -64,12 +99,13 @@ export default function App() {
         <footer className="py-10 px-6 lg:px-20 border-t" style={{ borderColor:'var(--border)' }}>
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <span className="font-serif italic text-ink2 text-sm">Atharva Kanchan</span>
-            <p className="font-mono text-muted text-xs tracking-widest">© {new Date().getFullYear()} — All rights reserved</p>
+            <p className="font-mono text-muted text-xs tracking-widest">© {new Date().getFullYear()} · Built with React & ♥</p>
             <div className="flex gap-6">
               {[
                 { l:'GitHub',    h:'https://github.com/atharvakanchan25' },
                 { l:'LinkedIn',  h:'https://www.linkedin.com/in/atharva-kanchan-797643271/' },
                 { l:'Medium',    h:'https://medium.com/@atharvakanchan959/about' },
+                { l:'Spotify',   h:'https://open.spotify.com/user/31p64yhvoc35knos7ufcxqre6e7u?si=2205d2edd11247e9' },
                 { l:'Quora',     h:'https://www.quora.com/profile/Atharva-Kanchan' },
                 { l:'Pinterest', h:'https://in.pinterest.com/atharva_kanchan/' },
               ].map(x => (
