@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:       #0D0D0D;
+  --bg2:      #111111;
+  --bg3:      #1A1A1A;
+  --ink:      #F0EFEC;
+  --ink2:     #B8B5AF;
+  --muted:    #5A5A5A;
+  --border:   rgba(240,239,236,0.07);
+  --accent:   #6366F1;
+  --accent2:  #7FAF2A;
+  --warm:     #C4A882;
+  --paper:    #141414;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Selection ── */
+::selection { background: rgba(99,102,241,0.25); color: var(--ink); }
+
+/* ── Font helpers ── */
+.font-serif  { font-family: 'Fraunces', Georgia, serif; }
+.font-mono   { font-family: 'DM Mono', monospace; }
+.font-sans   { font-family: 'DM Sans', system-ui, sans-serif; }
+
+/* ── Noise texture ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+}
+
+/* ── Accent text ── */
+.accent-text { color: var(--accent); }
+.accent2-text { color: var(--accent2); }
+
+/* ── Italic serif highlight ── */
+.serif-italic {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+/* ── Section label ── */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.label::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--muted);
+}
+
+/* ── Divider ── */
+.rule {
+  width: 100%; height: 1px;
+  background: var(--border);
+}
+
+/* ── Card base ── */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.card:hover {
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}
+
+/* ── Btn primary ── */
+.btn-p {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500; font-size: 0.875rem;
+  border-radius: 3px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+}
+.btn-p:hover { background: var(--accent); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(99,102,241,0.3); }
+
+/* ── Btn outline ── */
+.btn-o {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 27px;
+  border: 1px solid var(--border);
+  color: var(--ink2);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500; font-size: 0.875rem;
+  border-radius: 3px;
+  transition: all 0.25s ease;
+}
+.btn-o:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.08); }
+
+/* ── Tag pill ── */
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
+
+/* ── Skill chip ── */
+.chip {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--ink2);
+  background: var(--paper);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* ── Input ── */
+.field {
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 14px 16px;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); }
+.field::placeholder { color: var(--muted); }
+
+/* ── Neural SVG animation ── */
+@keyframes pulse-node {
+  0%,100% { opacity: 0.3; r: 3; }
+  50%      { opacity: 0.9; r: 5; }
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -40; }
+}
+.node-pulse { animation: pulse-node 3s ease-in-out infinite; }
+.edge-flow  { animation: dash-flow 4s linear infinite; stroke-dasharray: 6 10; }
+
+/* ── Parallax wrapper ── */
+.parallax-slow { will-change: transform; }
+
+/* ── Horizontal scroll ── */
+.h-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+}
+.h-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Writing card hover line ── */
+.writing-card { position: relative; }
+.writing-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+.writing-card:hover::after { width: 100%; }
+
+/* ── Cursor dot ── */
+.cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, opacity 0.3s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(79,70,229,0.4);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all 0.15s ease;
+}
+
+/* ── Typewriter cursor ── */
+.tw-cur::after {
+  content: '|';
+  color: var(--accent);
+  animation: blink 1s step-end infinite;
+  font-weight: 300;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Float animation ── */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ── Fade up ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+
+/* ── Section reveal (used with framer-motion whileInView) ── */
+.section-hidden { opacity: 0; transform: translateY(32px); }
+.section-visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
