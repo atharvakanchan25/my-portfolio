@@ -1,6 +1,5 @@
 {
   "name": "portfolio-website",
-  "homepage": "https://atharvakanchan25.github.io/my-portfolio",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
