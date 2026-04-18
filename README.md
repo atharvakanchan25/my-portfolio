@@ -4,7 +4,7 @@ Personal portfolio website built with React and Tailwind CSS. Warm editorial aes
 
 ## 🌐 Live Demo
 
-🔗 [View Portfolio](https://atharvakanchan25.github.io/my-portfolio/)
+🔗 [View Portfolio]([https://atharvakanchan25.github.io/my-portfolio/](https://my-portfolio-beryl-tau-34.vercel.app/))
 ---
 
 ## Stack
